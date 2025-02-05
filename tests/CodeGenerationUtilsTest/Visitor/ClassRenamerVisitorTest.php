@@ -24,15 +24,12 @@ use CodeGenerationUtils\Visitor\ClassRenamerVisitor;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Namespace_;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use stdClass;
 
-/**
- * Tests for {@see \CodeGenerationUtils\Visitor\ClassClonerVisitor}
- *
- * @covers \CodeGenerationUtils\Visitor\ClassRenamerVisitor
- */
+#[CoversClass(ClassRenamerVisitor::class)]
 class ClassRenamerVisitorTest extends TestCase
 {
     public function testRenamesNodesOnMatchingClass(): void

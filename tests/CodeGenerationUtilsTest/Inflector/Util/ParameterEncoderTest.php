@@ -21,19 +21,19 @@ declare(strict_types=1);
 namespace CodeGenerationUtilsTest\Inflector\Util;
 
 use CodeGenerationUtils\Inflector\Util\ParameterEncoder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Tests for {@see \CodeGenerationUtils\Inflector\Util\ParameterEncoder}
- */
+#[CoversClass(ParameterEncoder::class)]
 class ParameterEncoderTest extends TestCase
 {
     /**
      * @param mixed[] $parameters
      *
      * @dataProvider getParameters
-     * @covers \CodeGenerationUtils\Inflector\Util\ParameterEncoder::encodeParameters
      */
+    #[DataProvider('getParameters')]
     public function testGeneratesValidClassName(array $parameters): void
     {
         $encoder = new ParameterEncoder();
@@ -45,8 +45,8 @@ class ParameterEncoderTest extends TestCase
         );
     }
 
-    /** @psalm-return non-empty-list<array{array<mixed>}> */
-    public function getParameters(): array
+    /** @psalm-return non-empty-list<list{array<mixed>}> */
+    public static function getParameters(): array
     {
         return [
             [[]],

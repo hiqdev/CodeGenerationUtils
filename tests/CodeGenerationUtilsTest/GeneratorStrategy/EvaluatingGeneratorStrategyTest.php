@@ -23,6 +23,7 @@ namespace CodeGenerationUtilsTest\GeneratorStrategy;
 use CodeGenerationUtils\GeneratorStrategy\EvaluatingGeneratorStrategy;
 use CodeGenerationUtils\Inflector\Util\UniqueIdentifierGenerator;
 use PhpParser\Node\Stmt\Class_;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 use function class_exists;
@@ -30,15 +31,9 @@ use function ini_get;
 use function strpos;
 use function uniqid;
 
-/**
- * Tests for {@see \CodeGenerationUtils\GeneratorStrategy\EvaluatingGeneratorStrategy}
- */
+#[CoversClass(EvaluatingGeneratorStrategy::class)]
 class EvaluatingGeneratorStrategyTest extends TestCase
 {
-    /**
-     * @covers \CodeGenerationUtils\GeneratorStrategy\EvaluatingGeneratorStrategy::generate
-     * @covers \CodeGenerationUtils\GeneratorStrategy\EvaluatingGeneratorStrategy::__construct
-     */
     public function testGenerate(): void
     {
         $strategy  = new EvaluatingGeneratorStrategy();
@@ -49,10 +44,6 @@ class EvaluatingGeneratorStrategyTest extends TestCase
         self::assertTrue(class_exists($className, false));
     }
 
-    /**
-     * @covers \CodeGenerationUtils\GeneratorStrategy\EvaluatingGeneratorStrategy::generate
-     * @covers \CodeGenerationUtils\GeneratorStrategy\EvaluatingGeneratorStrategy::__construct
-     */
     public function testGenerateWithDisabledEval(): void
     {
         if (ini_get('suhosin.executor.disable_eval') !== '1') {

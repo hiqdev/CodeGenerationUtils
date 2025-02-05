@@ -24,17 +24,14 @@ use CodeGenerationUtils\Visitor\ClassClonerVisitor;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Declare_;
 use PhpParser\Node\Stmt\Namespace_;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 use function end;
 use function implode;
 
-/**
- * Tests for {@see \CodeGenerationUtils\Visitor\ClassClonerVisitor}
- *
- * @covers \CodeGenerationUtils\Visitor\ClassClonerVisitor
- */
+#[CoversClass(ClassClonerVisitor::class)]
 class ClassClonerVisitorTest extends TestCase
 {
     public function testClonesClassIntoEmptyNodeList(): void

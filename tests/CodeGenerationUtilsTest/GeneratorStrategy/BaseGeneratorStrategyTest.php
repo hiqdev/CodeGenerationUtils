@@ -24,16 +24,14 @@ use CodeGenerationUtils\GeneratorStrategy\BaseGeneratorStrategy;
 use CodeGenerationUtils\Inflector\Util\UniqueIdentifierGenerator;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\PrettyPrinterAbstract;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 use function strpos;
 
-/**
- * Tests for {@see \CodeGenerationUtils\GeneratorStrategy\BaseGeneratorStrategy}
- */
+#[CoversClass(BaseGeneratorStrategy::class)]
 class BaseGeneratorStrategyTest extends TestCase
 {
-    /** @covers \CodeGenerationUtils\GeneratorStrategy\BaseGeneratorStrategy::generate */
     public function testGenerate(): void
     {
         $strategy  = new BaseGeneratorStrategy();
@@ -43,10 +41,6 @@ class BaseGeneratorStrategyTest extends TestCase
         self::assertGreaterThan(0, strpos($generated, $className));
     }
 
-    /**
-     * @covers \CodeGenerationUtils\GeneratorStrategy\BaseGeneratorStrategy::setPrettyPrinter
-     * @covers \CodeGenerationUtils\GeneratorStrategy\BaseGeneratorStrategy::getPrettyPrinter
-     */
     public function testSetPrettyPrinter(): void
     {
         $strategy = new BaseGeneratorStrategy();
