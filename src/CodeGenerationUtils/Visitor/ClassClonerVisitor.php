@@ -27,6 +27,7 @@ use ReflectionClass;
 
 use function assert;
 use function file_get_contents;
+use function is_string;
 
 /**
  * Visitor capable of generating an AST given a reflection class that is written in a file
@@ -49,11 +50,15 @@ class ClassClonerVisitor implements NodeVisitor
      */
     public function beforeTraverse(array $nodes): array
     {
+        $fileContents = file_get_contents($this->reflectedClass->getFileName());
+
+        assert(is_string($fileContents));
+
         // quick fix - if the list is empty, replace it it
         if ($nodes === []) {
             $parsed = (new ParserFactory())
-                ->create(ParserFactory::PREFER_PHP7)
-                ->parse(file_get_contents($this->reflectedClass->getFileName()));
+                ->createForNewestSupportedVersion()
+                ->parse($fileContents);
 
             assert($parsed !== null); // leap of faith again - should always parse
 

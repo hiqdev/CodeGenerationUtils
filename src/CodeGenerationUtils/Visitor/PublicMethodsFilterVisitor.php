@@ -22,7 +22,7 @@ namespace CodeGenerationUtils\Visitor;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor;
 use PhpParser\NodeVisitorAbstract;
 
 /**
@@ -35,6 +35,6 @@ class PublicMethodsFilterVisitor extends NodeVisitorAbstract
      */
     public function leaveNode(Node $node): int|null
     {
-        return $node instanceof ClassMethod && ! $node->isPublic() ? NodeTraverser::REMOVE_NODE : null;
+        return $node instanceof ClassMethod && ! $node->isPublic() ? NodeVisitor::REMOVE_NODE : null;
     }
 }

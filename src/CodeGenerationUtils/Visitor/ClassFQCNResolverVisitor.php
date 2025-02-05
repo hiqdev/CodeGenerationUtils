@@ -48,7 +48,7 @@ class ClassFQCNResolverVisitor extends NodeVisitorAbstract
     }
 
     /**
-     * @return null
+     * {@inheritDoc}
      *
      * @throws Exception\UnexpectedValueException if more than one class is found.
      */

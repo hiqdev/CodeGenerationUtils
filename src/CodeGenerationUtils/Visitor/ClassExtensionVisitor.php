@@ -81,7 +81,7 @@ class ClassExtensionVisitor extends NodeVisitorAbstract
 
         if ($node instanceof Class_) {
             $namespace = $this->currentNamespace && $this->currentNamespace->name !== null
-                ? implode('\\', $this->currentNamespace->name->parts)
+                ? implode('\\', $this->currentNamespace->name->getParts())
                 : '';
 
             if (trim($namespace . '\\' . (string) $node->name, '\\') === $this->matchedClassFQCN) {

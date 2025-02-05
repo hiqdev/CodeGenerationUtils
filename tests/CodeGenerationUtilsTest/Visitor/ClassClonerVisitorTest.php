@@ -51,7 +51,7 @@ class ClassClonerVisitorTest extends TestCase
         $nodeName = $nodes[1]->name;
 
         self::assertNotNull($nodeName);
-        self::assertSame(__NAMESPACE__, implode('\\', $nodeName->parts));
+        self::assertSame(__NAMESPACE__, implode('\\', $nodeName->getParts()));
 
         $class = end($nodes[1]->stmts);
 

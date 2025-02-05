@@ -75,7 +75,8 @@ class ClassBuilderTest extends TestCase
 
         $thisMethod = reset($methods);
 
-        self::assertSame($currentMethod, (string) $thisMethod->name);
+        self::assertInstanceOf(ClassMethod::class, $thisMethod);
+        self::assertSame($currentMethod, $thisMethod->name->toString());
     }
 
     /**
@@ -105,6 +106,7 @@ class ClassBuilderTest extends TestCase
 
         $thisMethod = reset($methods);
 
-        self::assertSame($method, (string) $thisMethod->name);
+        self::assertInstanceOf(ClassMethod::class, $thisMethod);
+        self::assertSame($method, $thisMethod->name->toString());
     }
 }

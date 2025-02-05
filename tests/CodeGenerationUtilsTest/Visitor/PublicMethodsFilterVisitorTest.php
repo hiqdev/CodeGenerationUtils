@@ -21,10 +21,11 @@ declare(strict_types=1);
 namespace CodeGenerationUtilsTest\Visitor;
 
 use CodeGenerationUtils\Visitor\PublicMethodsFilterVisitor;
+use PhpParser\Modifiers;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -49,23 +50,23 @@ class PublicMethodsFilterVisitorTest extends TestCase
             [
                 new ClassMethod(
                     'foo',
-                    ['type' => Class_::MODIFIER_PUBLIC],
+                    ['flags' => Modifiers::PUBLIC],
                 ),
                 null,
             ],
             [
                 new ClassMethod(
                     'foo',
-                    ['type' => Class_::MODIFIER_PROTECTED],
+                    ['flags' => Modifiers::PROTECTED],
                 ),
-                NodeTraverser::REMOVE_NODE,
+                NodeVisitor::REMOVE_NODE,
             ],
             [
                 new ClassMethod(
                     'foo',
-                    ['type' => Class_::MODIFIER_PRIVATE],
+                    ['flags' => Modifiers::PRIVATE],
                 ),
-                NodeTraverser::REMOVE_NODE,
+                NodeVisitor::REMOVE_NODE,
             ],
             [new Class_('foo'), null],
         ];

@@ -26,8 +26,8 @@ use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\Node\Stmt\Throw_;
 use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor;
 use PhpParser\NodeVisitorAbstract;
 
 /**
@@ -69,7 +69,7 @@ class MethodDisablerVisitor extends NodeVisitorAbstract
         $filterResult = $filter($node);
 
         if ($filterResult === false) {
-            return NodeTraverser::REMOVE_NODE;
+            return NodeVisitor::REMOVE_NODE;
         }
 
         if ($filterResult === null) {
@@ -77,10 +77,12 @@ class MethodDisablerVisitor extends NodeVisitorAbstract
         }
 
         $node->stmts = [
-            new Throw_(
-                new New_(
-                    new FullyQualified('BadMethodCallException'),
-                    [new Arg(new String_('Method is disabled'))],
+            new Node\Stmt\Expression(
+                new Node\Expr\Throw_(
+                    new New_(
+                        new FullyQualified('BadMethodCallException'),
+                        [new Arg(new String_('Method is disabled'))],
+                    ),
                 ),
             ),
         ];

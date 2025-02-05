@@ -22,13 +22,12 @@ namespace CodeGenerationUtilsTest\Visitor;
 
 use CodeGenerationUtils\Visitor\MethodDisablerVisitor;
 use CodeGenerationUtilsTestAsset\CallableFilterStub;
+use PhpParser\Node\Expr\Throw_;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\Node\Stmt\Throw_;
-use PhpParser\NodeTraverser;
+use PhpParser\Node\Stmt\Expression;
+use PhpParser\NodeVisitor;
 use PHPUnit\Framework\TestCase;
-
-use function reset;
 
 /**
  * Tests for {@see \CodeGenerationUtils\Visitor\ClassClonerVisitor}
@@ -52,7 +51,10 @@ class MethodDisablerVisitorTest extends TestCase
         $statements = $method->stmts;
 
         self::assertIsArray($statements);
-        self::assertInstanceOf(Throw_::class, reset($statements));
+        self::assertCount(1, $statements);
+        self::assertArrayHasKey(0, $statements);
+        self::assertInstanceOf(Expression::class, $statements[0]);
+        self::assertInstanceOf(Throw_::class, $statements[0]->expr);
     }
 
     public function testSkipsOnFailedFiltering(): void
@@ -65,7 +67,7 @@ class MethodDisablerVisitorTest extends TestCase
         /** @psalm-suppress InvalidArgument $visitor callable is correctly typed here */
         $visitor = new MethodDisablerVisitor($filter);
 
-        self::assertSame(NodeTraverser::REMOVE_NODE, $visitor->leaveNode($method));
+        self::assertSame(NodeVisitor::REMOVE_NODE, $visitor->leaveNode($method));
     }
 
     public function testSkipsOnIgnoreFiltering(): void
