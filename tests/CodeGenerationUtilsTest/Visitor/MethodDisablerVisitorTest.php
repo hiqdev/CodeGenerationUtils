@@ -27,13 +27,10 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\NodeVisitor;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Tests for {@see \CodeGenerationUtils\Visitor\ClassClonerVisitor}
- *
- * @covers \CodeGenerationUtils\Visitor\MethodDisablerVisitor
- */
+#[CoversClass(MethodDisablerVisitor::class)]
 class MethodDisablerVisitorTest extends TestCase
 {
     public function testDisablesMethod(): void
@@ -41,7 +38,7 @@ class MethodDisablerVisitorTest extends TestCase
         $method = new ClassMethod('test');
         $filter = $this->createMock(CallableFilterStub::class);
 
-        $filter->expects(self::once())->method('__invoke')->with($method)->will(self::returnValue(true));
+        $filter->expects(self::once())->method('__invoke')->with($method)->willReturn(true);
 
         /** @psalm-suppress InvalidArgument $visitor callable is correctly typed here */
         $visitor = new MethodDisablerVisitor($filter);
@@ -62,7 +59,7 @@ class MethodDisablerVisitorTest extends TestCase
         $method = new ClassMethod('test');
         $filter = $this->createMock(CallableFilterStub::class);
 
-        $filter->expects(self::once())->method('__invoke')->with($method)->will(self::returnValue(false));
+        $filter->expects(self::once())->method('__invoke')->with($method)->willReturn(false);
 
         /** @psalm-suppress InvalidArgument $visitor callable is correctly typed here */
         $visitor = new MethodDisablerVisitor($filter);
@@ -75,7 +72,7 @@ class MethodDisablerVisitorTest extends TestCase
         $method = new ClassMethod('test');
         $filter = $this->createMock(CallableFilterStub::class);
 
-        $filter->expects(self::once())->method('__invoke')->with($method)->will(self::returnValue(null));
+        $filter->expects(self::once())->method('__invoke')->with($method)->willReturn(null);
 
         /** @psalm-suppress InvalidArgument $visitor callable is correctly typed here */
         $visitor = new MethodDisablerVisitor($filter);

@@ -25,6 +25,7 @@ use CodeGenerationUtilsTestAsset\ClassWithDefaultValueIsConstantMethod;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Namespace_;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
@@ -32,11 +33,7 @@ use function array_filter;
 use function assert;
 use function reset;
 
-/**
- * Tests for {@see \CodeGenerationUtils\ReflectionBuilder\ClassBuilder}
- *
- * @covers \CodeGenerationUtils\ReflectionBuilder\ClassBuilder
- */
+#[CoversClass(ClassBuilder::class)]
 class ClassBuilderTest extends TestCase
 {
     /**

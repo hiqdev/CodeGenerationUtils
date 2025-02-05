@@ -22,19 +22,14 @@ namespace CodeGenerationUtilsTest\FileLocator;
 
 use CodeGenerationUtils\Exception\InvalidGeneratedClassesDirectoryException;
 use CodeGenerationUtils\FileLocator\FileLocator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 use const DIRECTORY_SEPARATOR;
 
-/**
- * Tests for {@see \CodeGenerationUtils\FileLocator\FileLocator}
- */
+#[CoversClass(FileLocator::class)]
 class FileLocatorTest extends TestCase
 {
-    /**
-     * @covers \CodeGenerationUtils\FileLocator\FileLocator::__construct
-     * @covers \CodeGenerationUtils\FileLocator\FileLocator::getGeneratedClassFileName
-     */
     public function testGetGeneratedClassFileName(): void
     {
         $locator = new FileLocator(__DIR__);
@@ -49,7 +44,6 @@ class FileLocatorTest extends TestCase
         );
     }
 
-    /** @covers \CodeGenerationUtils\FileLocator\FileLocator::__construct */
     public function testRejectsNonExistingDirectory(): void
     {
         $this->expectException(InvalidGeneratedClassesDirectoryException::class);

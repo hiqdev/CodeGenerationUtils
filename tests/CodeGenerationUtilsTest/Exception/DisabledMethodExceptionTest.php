@@ -21,14 +21,12 @@ declare(strict_types=1);
 namespace CodeGenerationUtilsTest\Exception;
 
 use CodeGenerationUtils\Exception\DisabledMethodException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Tests for {@see \CodeGenerationUtils\Exception\DisabledMethodException}
- */
+#[CoversClass(DisabledMethodException::class)]
 class DisabledMethodExceptionTest extends TestCase
 {
-    /** @covers \CodeGenerationUtils\Exception\DisabledMethodException::disabledMethod */
     public function testDisabledMethod(): void
     {
         $exception = DisabledMethodException::disabledMethod('foo::bar');

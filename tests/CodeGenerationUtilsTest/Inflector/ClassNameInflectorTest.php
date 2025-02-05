@@ -22,16 +22,15 @@ namespace CodeGenerationUtilsTest\Inflector;
 
 use CodeGenerationUtils\Inflector\ClassNameInflector;
 use CodeGenerationUtils\Inflector\ClassNameInflectorInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Tests for {@see \CodeGenerationUtils\Inflector\ClassNameInflector}
- *
- * @covers \CodeGenerationUtils\Inflector\ClassNameInflector
- */
+#[CoversClass(ClassNameInflector::class)]
 class ClassNameInflectorTest extends TestCase
 {
     /** @dataProvider getClassNames */
+    #[DataProvider('getClassNames')]
     public function testInflector(string $realClassName, string $generatedClassName): void
     {
         $inflector = new ClassNameInflector('GeneratedClassNS');
@@ -81,8 +80,8 @@ class ClassNameInflectorTest extends TestCase
         );
     }
 
-    /** @psalm-return non-empty-list<array{string, string}> */
-    public function getClassNames(): array
+    /** @psalm-return non-empty-list<list{string, string}> */
+    public static function getClassNames(): array
     {
         return [
             [

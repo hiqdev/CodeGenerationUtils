@@ -24,6 +24,7 @@ use CodeGenerationUtils\Autoloader\Autoloader;
 use CodeGenerationUtils\FileLocator\FileLocatorInterface;
 use CodeGenerationUtils\Inflector\ClassNameInflectorInterface;
 use CodeGenerationUtils\Inflector\Util\UniqueIdentifierGenerator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -32,9 +33,7 @@ use function file_put_contents;
 use function sys_get_temp_dir;
 use function uniqid;
 
-/**
- * Tests for {@see \CodeGenerationUtils\Autoloader\Autoloader}
- */
+#[CoversClass(Autoloader::class)]
 final class AutoloaderTest extends TestCase
 {
     private Autoloader $autoloader;
@@ -43,7 +42,6 @@ final class AutoloaderTest extends TestCase
     /** @var ClassNameInflectorInterface&MockObject */
     private ClassNameInflectorInterface $classNameInflector;
 
-    /** @covers \CodeGenerationUtils\Autoloader\Autoloader::__construct */
     public function setUp(): void
     {
         $this->fileLocator        = $this->createMock(FileLocatorInterface::class);
@@ -51,7 +49,6 @@ final class AutoloaderTest extends TestCase
         $this->autoloader         = new Autoloader($this->fileLocator, $this->classNameInflector);
     }
 
-    /** @covers \CodeGenerationUtils\Autoloader\Autoloader::__invoke */
     public function testWillNotAutoloadUserClasses(): void
     {
         $className = 'Foo\\' . UniqueIdentifierGenerator::getIdentifier('Bar');
@@ -65,7 +62,6 @@ final class AutoloaderTest extends TestCase
         self::assertFalse($this->autoloader->__invoke($className));
     }
 
-    /** @covers \CodeGenerationUtils\Autoloader\Autoloader::__invoke */
     public function testWillNotAutoloadNonExistingClass(): void
     {
         $className = 'Foo\\' . UniqueIdentifierGenerator::getIdentifier('Bar');
@@ -86,13 +82,11 @@ final class AutoloaderTest extends TestCase
         self::assertFalse($this->autoloader->__invoke($className));
     }
 
-    /** @covers \CodeGenerationUtils\Autoloader\Autoloader::__invoke */
     public function testWillNotAutoloadExistingClass(): void
     {
         self::assertFalse($this->autoloader->__invoke(self::class));
     }
 
-    /** @covers \CodeGenerationUtils\Autoloader\Autoloader::__invoke */
     public function testWillAutoloadExistingFile(): void
     {
         $namespace = 'Foo';

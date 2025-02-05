@@ -26,16 +26,15 @@ use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\NodeVisitor;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Tests for {@see \CodeGenerationUtils\Visitor\ClassClonerVisitor}
- *
- * @covers \CodeGenerationUtils\Visitor\PublicMethodsFilterVisitor
- */
+#[CoversClass(PublicMethodsFilterVisitor::class)]
 class PublicMethodsFilterVisitorTest extends TestCase
 {
     /** @dataProvider nodeProvider */
+    #[DataProvider('nodeProvider')]
     public function testRemovesOnlyPrivateMethods(Node $node, int|null $expected): void
     {
         $visitor = new PublicMethodsFilterVisitor();
@@ -44,7 +43,7 @@ class PublicMethodsFilterVisitorTest extends TestCase
     }
 
     /** @psalm-return non-empty-list<array{ClassMethod|Class_, int|null}> */
-    public function nodeProvider(): array
+    public static function nodeProvider(): array
     {
         return [
             [

@@ -26,6 +26,7 @@ use CodeGenerationUtils\Inflector\Util\UniqueIdentifierGenerator;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Namespace_;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 use function class_exists;
@@ -33,15 +34,9 @@ use function strpos;
 use function sys_get_temp_dir;
 use function uniqid;
 
-/**
- * Tests for {@see \CodeGenerationUtils\GeneratorStrategy\FileWriterGeneratorStrategy}
- */
+#[CoversClass(FileWriterGeneratorStrategy::class)]
 class FileWriterGeneratorStrategyTest extends TestCase
 {
-    /**
-     * @covers \CodeGenerationUtils\GeneratorStrategy\FileWriterGeneratorStrategy::__construct
-     * @covers \CodeGenerationUtils\GeneratorStrategy\FileWriterGeneratorStrategy::generate
-     */
     public function testGenerate(): void
     {
         $locator   = $this->createMock(FileLocatorInterface::class);

@@ -21,17 +21,15 @@ declare(strict_types=1);
 namespace CodeGenerationUtilsTest\Inflector\Util;
 
 use CodeGenerationUtils\Inflector\Util\UniqueIdentifierGenerator;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Tests for {@see \CodeGenerationUtils\Inflector\Util\UniqueIdentifierGenerator}
- */
+#[CoversClass(UniqueIdentifierGenerator::class)]
 class UniqueIdentifierGeneratorTest extends TestCase
 {
-    /**
-     * @dataProvider getBaseIdentifierNames
-     * @covers \CodeGenerationUtils\Inflector\Util\UniqueIdentifierGenerator::getIdentifier
-     */
+    /** @dataProvider getBaseIdentifierNames */
+    #[DataProvider('getBaseIdentifierNames')]
     public function testGeneratesUniqueIdentifiers(string $name): void
     {
         self::assertNotSame(
@@ -40,10 +38,8 @@ class UniqueIdentifierGeneratorTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider getBaseIdentifierNames
-     * @covers \CodeGenerationUtils\Inflector\Util\UniqueIdentifierGenerator::getIdentifier
-     */
+    /** @dataProvider getBaseIdentifierNames */
+    #[DataProvider('getBaseIdentifierNames')]
     public function testGeneratesValidIdentifiers(string $name): void
     {
         self::assertMatchesRegularExpression(
@@ -57,7 +53,7 @@ class UniqueIdentifierGeneratorTest extends TestCase
      *
      * @return string[][]
      */
-    public function getBaseIdentifierNames(): array
+    public static function getBaseIdentifierNames(): array
     {
         return [
             [''],
