@@ -55,7 +55,7 @@ class EvaluatingGeneratorStrategyTest extends TestCase
      */
     public function testGenerateWithDisabledEval(): void
     {
-        if (! ini_get('suhosin.executor.disable_eval')) {
+        if (ini_get('suhosin.executor.disable_eval') !== '1') {
             self::markTestSkipped('Ini setting "suhosin.executor.disable_eval" is needed to run this test');
         }
 

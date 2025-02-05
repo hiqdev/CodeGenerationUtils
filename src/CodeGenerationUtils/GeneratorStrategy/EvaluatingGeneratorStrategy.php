@@ -39,7 +39,7 @@ class EvaluatingGeneratorStrategy extends BaseGeneratorStrategy
      */
     public function __construct()
     {
-        $this->canEval = ! ini_get('suhosin.executor.disable_eval');
+        $this->canEval = ini_get('suhosin.executor.disable_eval') === '1';
     }
 
     /**

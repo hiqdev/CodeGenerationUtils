@@ -54,7 +54,7 @@ class ClassRenamerVisitorTest extends TestCase
         $namespaceName = $namespace->name;
 
         self::assertNotNull($namespaceName);
-        self::assertSame(['Foo', 'Bar'], $namespaceName->parts);
+        self::assertSame(['Foo', 'Bar'], $namespaceName->getParts());
         self::assertSame([$class], $namespace->stmts);
     }
 
@@ -77,7 +77,7 @@ class ClassRenamerVisitorTest extends TestCase
         $namespaceName = $namespace->name;
 
         self::assertNotNull($namespaceName);
-        self::assertSame(['CodeGenerationUtilsTest', 'Visitor'], $namespaceName->parts);
+        self::assertSame(['CodeGenerationUtilsTest', 'Visitor'], $namespaceName->getParts());
     }
 
     public function testIgnoresNodesOnNonMatchingNamespace(): void
@@ -99,7 +99,7 @@ class ClassRenamerVisitorTest extends TestCase
         $namespaceName = $namespace->name;
 
         self::assertNotNull($namespaceName);
-        self::assertSame(['Wrong', 'Namespace', 'Here'], $namespaceName->parts);
+        self::assertSame(['Wrong', 'Namespace', 'Here'], $namespaceName->getParts());
     }
 
     public function testMatchOnEmptyNamespace(): void
@@ -168,6 +168,6 @@ class ClassRenamerVisitorTest extends TestCase
         $namespaceName = $namespace->name;
 
         self::assertNotNull($namespaceName);
-        self::assertSame(['Wrong', 'Namespace', 'Here'], $namespaceName->parts);
+        self::assertSame(['Wrong', 'Namespace', 'Here'], $namespaceName->getParts());
     }
 }

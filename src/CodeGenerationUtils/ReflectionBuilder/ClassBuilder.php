@@ -20,7 +20,6 @@ declare(strict_types=1);
 
 namespace CodeGenerationUtils\ReflectionBuilder;
 
-use BadMethodCallException;
 use PhpParser\Builder\Method;
 use PhpParser\Builder\Param;
 use PhpParser\Builder\Property;
@@ -94,16 +93,6 @@ class ClassBuilder
         }
 
         return [new Namespace_(new Name(explode('\\', $namespace)), $statements)];
-    }
-
-    /**
-     * @psalm-return never-return
-     *
-     * @throws BadMethodCallException disabled method.
-     */
-    public function getNode(): void
-    {
-        throw new BadMethodCallException('Disabled');
     }
 
     protected function buildProperty(ReflectionProperty $reflectionProperty): Node\Stmt\Property
@@ -192,11 +181,9 @@ class ClassBuilder
 
         if ($reflectionParameter->isDefaultValueAvailable()) {
             if ($reflectionParameter->isDefaultValueConstant()) {
-                $constantName = $reflectionParameter->getDefaultValueConstantName();
-
-                assert($constantName !== null);
-
-                $parameterBuilder->setDefault(new ConstFetch(new Name($constantName)));
+                $parameterBuilder->setDefault(new ConstFetch(new Name(
+                    $reflectionParameter->getDefaultValueConstantName(),
+                )));
             } else {
                 $parameterBuilder->setDefault($reflectionParameter->getDefaultValue());
             }
