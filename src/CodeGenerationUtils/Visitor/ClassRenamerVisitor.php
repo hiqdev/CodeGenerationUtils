@@ -100,7 +100,7 @@ class ClassRenamerVisitor extends NodeVisitorAbstract
 
                 assert($namespaceName !== null);
 
-                $namespace->name = new Name\FullyQualified($newParts);
+                $namespace->name = new Node\Name($newParts);
 
                 return $namespace;
             }
