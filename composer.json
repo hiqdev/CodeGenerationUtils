@@ -1,9 +1,9 @@
 {
-    "name":              "ocramius/code-generator-utils",
+    "name":              "hiqdev/code-generator-utils",
     "description":       "A set of code generator utilities built on top of PHP-Parsers that ease its use when combined with Reflection",
     "type":              "library",
     "license":           "MIT",
-    "homepage":          "https://github.com/Ocramius/CodeGenerationUtils",
+    "homepage":          "https://github.com/hiqdev/CodeGenerationUtils",
     "keywords":          [
         "reflection",
         "code generation",
