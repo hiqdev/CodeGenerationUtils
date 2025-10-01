@@ -1,9 +1,9 @@
 {
-    "name":              "ocramius/code-generator-utils",
+    "name":              "hiqdev/code-generator-utils",
     "description":       "A set of code generator utilities built on top of PHP-Parsers that ease its use when combined with Reflection",
     "type":              "library",
     "license":           "MIT",
-    "homepage":          "https://github.com/Ocramius/CodeGenerationUtils",
+    "homepage":          "https://github.com/hiqdev/CodeGenerationUtils",
     "keywords":          [
         "reflection",
         "code generation",
@@ -19,12 +19,12 @@
         }
     ],
     "require": {
-        "php":                       "~8.2.0 || ~8.3.0 || ~8.4.0",
-        "nikic/php-parser":          "^v5.4.0"
+        "php":                       "^8.3",
+        "nikic/php-parser":          "^5.6.1"
     },
     "require-dev": {
         "doctrine/coding-standard":               "^12.0.0",
-        "phpunit/phpunit":                        "^11.5.7",
+        "phpunit/phpunit":                        "^12.0",
         "psalm/plugin-phpunit":                   "^0.19.2",
         "roave/infection-static-analysis-plugin": "^1.36.0",
         "vimeo/psalm":                            "^6.5.1"
