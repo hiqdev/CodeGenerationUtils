@@ -29,6 +29,9 @@
         "roave/infection-static-analysis-plugin": "^1.36.0",
         "vimeo/psalm":                            "^6.5.1"
     },
+    "replace": {
+        "ocramius/code-generator-utils": "self.version"
+    },
     "autoload": {
         "psr-4": {
             "CodeGenerationUtils\\": "src/CodeGenerationUtils"
@@ -51,7 +54,7 @@
             "infection/extension-installer": false
         },
         "platform": {
-            "php": "8.2.99"
+            "php": "8.3.99"
         }
     }
 }
